@@ -20,7 +20,7 @@ def home():
     client_url = app.config.get('CLIENT_URL')
     if client_url:
         return redirect(client_url)
-    return redirect(url_for('login'))
+    return "<h1>Salon Chic Backend</h1><p>API is running. <br>frontend URL (CLIENT_URL) is not configured.</p>"
 
 # Database Configuration
 # Default to local MySQL, compatible with previous setup
@@ -292,9 +292,9 @@ TPL_LOGIN = """
             </div>
             <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
         </form>
-        {% if client_url %}
-        <a href="{{ client_url }}" class="btn btn-outline-secondary w-100 mt-3" style="border: 1px solid #ddd; padding: 0.75rem;">Back to Website</a>
-        {% endif %}
+            <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
+        </form>
+        <a href="/" class="btn btn-outline-secondary w-100 mt-3" style="border: 1px solid #ddd; padding: 0.75rem;">Back to Website</a>
         <p class="text-center mt-4 text-muted small">&copy; 2025 Salon Chic</p>
     </div>
 </body>
