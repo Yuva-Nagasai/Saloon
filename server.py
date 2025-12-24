@@ -17,7 +17,10 @@ CORS(app)
 
 @app.route('/')
 def home():
-    return redirect(app.config.get('CLIENT_URL', 'http://localhost:5173'))
+    client_url = app.config.get('CLIENT_URL')
+    if client_url:
+        return redirect(client_url)
+    return redirect(url_for('login'))
 
 # Database Configuration
 # Default to local MySQL, compatible with previous setup
@@ -25,7 +28,7 @@ def home():
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlite:///salon.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'dev-secret-key-salon-chic-single-file'
-app.config['CLIENT_URL'] = os.environ.get('CLIENT_URL', 'http://localhost:5173')
+app.config['CLIENT_URL'] = os.environ.get('CLIENT_URL')
 
 db = SQLAlchemy(app)
 login_manager = LoginManager()
@@ -289,7 +292,9 @@ TPL_LOGIN = """
             </div>
             <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
         </form>
+        {% if client_url %}
         <a href="{{ client_url }}" class="btn btn-outline-secondary w-100 mt-3" style="border: 1px solid #ddd; padding: 0.75rem;">Back to Website</a>
+        {% endif %}
         <p class="text-center mt-4 text-muted small">&copy; 2025 Salon Chic</p>
     </div>
 </body>
@@ -658,7 +663,12 @@ def login():
 
 @app.route('/admin/logout')
 @login_required
-def logout(): logout_user(); return redirect(app.config['CLIENT_URL'])
+def logout():
+    logout_user()
+    client_url = app.config.get('CLIENT_URL')
+    if client_url:
+        return redirect(client_url)
+    return redirect(url_for('login'))
 
 @app.route('/admin')
 @app.route('/admin/dashboard')
