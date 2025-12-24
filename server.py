@@ -28,7 +28,7 @@ def home():
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlite:///salon.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'dev-secret-key-salon-chic-single-file'
-app.config['CLIENT_URL'] = os.environ.get('CLIENT_URL')
+app.config['CLIENT_URL'] = os.environ.get('CLIENT_URL', 'https://limegreen-nightingale-466886.hostingersite.com/')
 
 db = SQLAlchemy(app)
 login_manager = LoginManager()
@@ -290,8 +290,6 @@ TPL_LOGIN = """
             <div class="mb-3">
                 <input type="password" name="password" class="form-control" placeholder="Password" required>
             </div>
-            <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
-        </form>
             <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
         </form>
         <a href="/" class="btn btn-outline-secondary w-100 mt-3" style="border: 1px solid #ddd; padding: 0.75rem;">Back to Website</a>
