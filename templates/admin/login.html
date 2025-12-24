@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Salon Chic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Background decorative elements */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(212, 163, 115, 0.05) 0%, rgba(188, 108, 37, 0.05) 100%);
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(188, 108, 37, 0.03) 0%, rgba(212, 163, 115, 0.03) 100%);
+            z-index: 0;
+        }
+
+        .login-wrapper {
+            width: 100%;
+            max-width: 480px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-card {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 4px 24px rgba(51, 51, 51, 0.08),
+                        0 8px 48px rgba(51, 51, 51, 0.04);
+            overflow: hidden;
+            border: 1px solid rgba(212, 163, 115, 0.1);
+        }
+
+        .login-header {
+            background: linear-gradient(135deg, #d4a373 0%, #bc6c25 100%);
+            padding: 48px 40px 40px;
+            text-align: center;
+            color: #ffffff;
+            position: relative;
+        }
+
+        .login-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .logo-container {
+            margin-bottom: 24px;
+        }
+
+        .logo-circle {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-circle::before {
+            content: '✂';
+            font-size: 36px;
+        }
+
+        .login-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .login-header p {
+            font-size: 14px;
+            font-weight: 400;
+            opacity: 0.95;
+            letter-spacing: 0.2px;
+        }
+
+        .login-body {
+            padding: 48px 40px 40px;
+        }
+
+        .welcome-text {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .welcome-text h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .welcome-text p {
+            font-size: 14px;
+            color: #666666;
+            font-weight: 400;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 10px;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            font-size: 15px;
+            color: #333333;
+            background: #ffffff;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: inherit;
+            font-weight: 400;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #bc6c25;
+            box-shadow: 0 0 0 4px rgba(188, 108, 37, 0.08);
+        }
+
+        .form-control:hover {
+            border-color: #d4a373;
+        }
+
+        .form-control::placeholder {
+            color: #999999;
+            font-weight: 400;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 16px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #ffffff;
+            background: linear-gradient(135deg, #bc6c25 0%, #d4a373 100%);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.5px;
+            font-family: inherit;
+            margin-top: 8px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(188, 108, 37, 0.25);
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(188, 108, 37, 0.35);
+            background: linear-gradient(135deg, #a55a1e 0%, #c4915e 100%);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(188, 108, 37, 0.25);
+        }
+
+        .btn-login:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(188, 108, 37, 0.2);
+        }
+
+        .alert {
+            padding: 14px 18px;
+            margin-bottom: 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.5;
+            border: none;
+        }
+
+        .alert-danger {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+            color: #c33;
+            border-left: 4px solid #c33;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .footer p {
+            font-size: 12px;
+            color: #999999;
+            font-weight: 400;
+        }
+
+        .footer a {
+            color: #bc6c25;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer a:hover {
+            color: #d4a373;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 640px) {
+            .login-wrapper {
+                max-width: 100%;
+            }
+
+            .login-card {
+                border-radius: 20px;
+            }
+
+            .login-header {
+                padding: 40px 28px 32px;
+            }
+
+            .login-header h1 {
+                font-size: 24px;
+            }
+
+            .login-body {
+                padding: 36px 28px 32px;
+            }
+
+            .welcome-text h2 {
+                font-size: 22px;
+            }
+
+            .logo-circle {
+                width: 64px;
+                height: 64px;
+            }
+
+            .logo-circle::before {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-wrapper">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo-container">
+                    <div class="logo-circle"></div>
+                </div>
+                <h1>Salon Chic</h1>
+                <p>Administrator Portal</p>
+            </div>
+
+            <div class="login-body">
+                <div class="welcome-text">
+                    <h2>Welcome Back</h2>
+                    <p>Sign in to access your dashboard</p>
+                </div>
+
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="alert alert-danger">
+                    {{ messages[0] }}
+                </div>
+                {% endif %}
+                {% endwith %}
+
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <div class="input-wrapper">
+                            <input type="text" 
+                                   id="username" 
+                                   name="username" 
+                                   class="form-control" 
+                                   placeholder="Enter your username" 
+                                   required 
+                                   autofocus>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-wrapper">
+                            <input type="password" 
+                                   id="password" 
+                                   name="password" 
+                                   class="form-control" 
+                                   placeholder="Enter your password" 
+                                   required>
+                        </div>
+                    </div>
+
+                    <button class="btn-login" type="submit">
+                        Sign In
+                    </button>
+                </form>
+
+                <div class="footer">
+                    <p>© 2025 Salon Chic. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

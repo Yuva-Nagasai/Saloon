@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Stylists</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <a href="{{ url_for('admin.stylists_create') }}" class="btn btn-sm btn-outline-primary">
+            + New Stylist
+        </a>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Specialties</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stylist in stylists %}
+            <tr>
+                <td>{{ stylist.id }}</td>
+                <td>{{ stylist.name }}</td>
+                <td>{{ stylist.role }}</td>
+                <td>{{ stylist.specialties }}</td>
+                <td>
+                    <a href="{{ url_for('admin.stylists_edit', id=stylist.id) }}"
+                        class="btn btn-sm btn-outline-secondary">Edit</a>
+                    <form action="{{ url_for('admin.stylists_delete', id=stylist.id) }}" method="POST"
+                        style="display:inline" onsubmit="return confirm('Are you sure?');">
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

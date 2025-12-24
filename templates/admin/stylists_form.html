@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">{{ 'Edit' if stylist else 'New' }} Stylist</h1>
+</div>
+
+<form method="POST">
+    <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" name="name" value="{{ stylist.name if stylist else '' }}"
+            required>
+    </div>
+
+    <div class="mb-3">
+        <label for="role" class="form-label">Role</label>
+        <input type="text" class="form-control" id="role" name="role" value="{{ stylist.role if stylist else '' }}"
+            required>
+    </div>
+
+    <div class="mb-3">
+        <label for="bio" class="form-label">Bio</label>
+        <textarea class="form-control" id="bio" name="bio" rows="3"
+            required>{{ stylist.bio if stylist else '' }}</textarea>
+    </div>
+
+    <div class="mb-3">
+        <label for="image" class="form-label">Image URL</label>
+        <input type="text" class="form-control" id="image" name="image" value="{{ stylist.image if stylist else '' }}"
+            required>
+    </div>
+
+    <div class="mb-3">
+        <label for="specialties" class="form-label">Specialties (comma separated)</label>
+        <input type="text" class="form-control" id="specialties" name="specialties"
+            value="{{ stylist.specialties if stylist else '' }}">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Stylist</button>
+    <a href="{{ url_for('admin.stylists_list') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

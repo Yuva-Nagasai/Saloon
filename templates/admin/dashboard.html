@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Dashboard</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Bookings</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ stats.bookings }}</h5>
+                <p class="card-text">Total bookings received.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-header">Services</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ stats.services }}</h5>
+                <p class="card-text">Active services available.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-header">Stylists</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ stats.stylists }}</h5>
+                <p class="card-text">Team members listed.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-info mb-3">
+            <div class="card-header">Messages</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ stats.messages }}</h5>
+                <p class="card-text">Contact messages.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
